@@ -28,7 +28,9 @@ MakeFIFOs = structure(function# creates named Unix pipes, which gzipped files ca
 	return(c(cmd1,cmd2))
 ### filter string
 }, ex = function(){
-  MakeFIFOs(verbose=2)
-  MakeFIFOs(filterStr=" | awk '$2 > 100 && $3 > 5' | 
+  if (0){
+    MakeFIFOs(verbose=2)
+    MakeFIFOs(filterStr=" | awk '$2 > 100 && $3 > 5' | 
             cut -f2,3 -d\" \" --complement | head -n 10000 | sort -k1,1")
+  }
 })

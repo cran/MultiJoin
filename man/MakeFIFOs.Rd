@@ -23,7 +23,9 @@ This string is typically used in between pipes. }
 
 
 \examples{
-MakeFIFOs(verbose=2)
-MakeFIFOs(filterStr=" | awk '$2 > 100 && $3 > 5' | 
+if (0){
+  MakeFIFOs(verbose=2)
+  MakeFIFOs(filterStr=" | awk '$2 > 100 && $3 > 5' | 
           cut -f2,3 -d\" \" --complement | head -n 10000 | sort -k1,1")
+}
 }

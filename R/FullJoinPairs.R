@@ -28,7 +28,7 @@ FullJoinPairs <- structure(function#   create command to fully join lines of two
     ##   Blank separators typically need to be quoted for the shell.  For
     ##   example, the commands join -o 1.2,2.2 and join -o 1.2 2.2
     ##   are equivalent.
-    
+
     if (missing(o1) | is.null(o1) | !is.numeric(o1)) {
       #NCOL1 = as.numeric(system(paste("head -n 1 ", f1, " | wc -w "), intern= TRUE))
       NCOL1=CountColumns(f1, sep,mycat="cat ")
@@ -55,6 +55,8 @@ FullJoinPairs <- structure(function#   create command to fully join lines of two
     return(cmd);
     ### returns command
   }, ex = function(){
-    ret = ArtificialData(fakeDataDir=tempdir(), numFiles=2,NCOL = rep(4,2))
-    FullJoinPairs(ret$fnames[[1]][1], ret$fnames[[2]][1], o1=2:4, o2 = 2:4)
+    if (0){
+      ret = ArtificialData(fakeDataDir=tempdir(), numFiles=2,NCOL = rep(4,2))
+      FullJoinPairs(ret$fnames[[1]][1], ret$fnames[[2]][1], o1=2:4, o2 = 2:4)
+    }
   })

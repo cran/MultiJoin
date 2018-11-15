@@ -43,7 +43,7 @@ FullJoin <- structure(function# create command to fully join multiple (more than
   if (verbose < 2){#do not execute if level of verbosity is higher than 1
     if (ReturnData) {
       con = pipe(FullCmd, "r")
-      x = read.table(con, sep = sep, stringsAsFactors = FALSE)
+      x = utils::read.table(con, sep = sep, stringsAsFactors = FALSE)
       close(con)
     } else {
       system(FullCmd)
@@ -60,44 +60,45 @@ FullJoin <- structure(function# create command to fully join multiple (more than
   if (ReturnData) return(x) else return(c(unlist(FIFOcmds),FullCmd));
   ### returns command only
 }, ex = function(){
-  #no FIFOs:
-  FullJoin(NumFields = rep(4,2))
-  FullJoin(paste0("ftr",1:4,".txt"), NumFields = rep(4, 4), suffix = " | gzip > joined.txt.gz")
-  FullJoin(paste0("ftr",1:4,".txt"), NumFields = rep(3, 4),missingValue="0", suffix = "")
-  #with FIFOs:
-  FullJoin(paste0("ftr",1:4,".txt"), mycat = "cat ", NumFields = rep(3, 4),missingValue="0", 
-           suffix = "", verbose=2)
-  FullJoin(paste0("ftr",1:3,".txt.gz"), mycat = "gunzip -cf ", filterStr = " | cut -f1,3", 
-           NumFields = rep(2, 3), verbose=2)
-  #selected columns only:
-  FullJoin(paste0("ftr",1:3,".txt"), mycat = "cat ", filterStr = "cut -f1,3",  
-           NumFields = rep(2, 3),missingValue="0", suffix = "", verbose=2)
-  
-  ret = ArtificialData(fakeDataDir="./fakeData2", joinKey=letters, numFiles = 10, 
-                       N = rep(18,10), NCOL=rep(5,10))
-  FullJoin(paste0("./fakeData2/file",1:10,".txt"),missingValue="0", suffix = "", verbose=2)
-  
-  # let's try FIFOs:
-  #small:
-  cmd = FullJoin(paste0("file",1:2,".txt"), mycat = "cat ", NumFields = rep(5, 2),
-                 missingValue="0", suffix = " > joined.txt", verbose=2)
-  
-  cmd = FullJoin(paste0("file",1:3,".txt"), mycat = "cat ", NumFields = rep(5, 3),
-                 missingValue="0", suffix = " > joined.txt", verbose=2)
-  
-  # and now gzipped files:
-  ret = ArtificialData(fakeDataDir="./fakeData", joinKey=letters, numFiles = 10,GZIP =1, 
-                       N = rep(18,10), NCOL=rep(5,10))
-  cmd = FullJoin(paste0("./fakeData/file",1:10,".txt.gz"), mycat = "gunzip -c ",  
-           NumFields = rep(3, 10),missingValue="NA",
-           filterStr = " | cut -f1,2,3",
-           suffix = "  > joined.txt", verbose=2)
-  
-  x = FullJoin(paste0("./fakeData/file",1:10,".txt.gz"), mycat = "gunzip -c ",  
+  if (0){
+    #no FIFOs:
+    FullJoin(NumFields = rep(4,2))
+    FullJoin(paste0("ftr",1:4,".txt"), NumFields = rep(4, 4), suffix = " | gzip > joined.txt.gz")
+    FullJoin(paste0("ftr",1:4,".txt"), NumFields = rep(3, 4),missingValue="0", suffix = "")
+    #with FIFOs:
+    FullJoin(paste0("ftr",1:4,".txt"), mycat = "cat ", NumFields = rep(3, 4),missingValue="0", 
+             suffix = "", verbose=2)
+    FullJoin(paste0("ftr",1:3,".txt.gz"), mycat = "gunzip -cf ", filterStr = " | cut -f1,3", 
+             NumFields = rep(2, 3), verbose=2)
+    #selected columns only:
+    FullJoin(paste0("ftr",1:3,".txt"), mycat = "cat ", filterStr = "cut -f1,3",  
+             NumFields = rep(2, 3),missingValue="0", suffix = "", verbose=2)
+    
+    ret = ArtificialData(fakeDataDir="./fakeData2", joinKey=letters, numFiles = 10, 
+                         N = rep(18,10), NCOL=rep(5,10))
+    FullJoin(paste0("./fakeData2/file",1:10,".txt"),missingValue="0", suffix = "", verbose=2)
+    
+    # let's try FIFOs:
+    #small:
+    cmd = FullJoin(paste0("file",1:2,".txt"), mycat = "cat ", NumFields = rep(5, 2),
+                   missingValue="0", suffix = " > joined.txt", verbose=2)
+    
+    cmd = FullJoin(paste0("file",1:3,".txt"), mycat = "cat ", NumFields = rep(5, 3),
+                   missingValue="0", suffix = " > joined.txt", verbose=2)
+    
+    # and now gzipped files:
+    ret = ArtificialData(fakeDataDir="./fakeData", joinKey=letters, numFiles = 10,GZIP =1, 
+                         N = rep(18,10), NCOL=rep(5,10))
+    cmd = FullJoin(paste0("./fakeData/file",1:10,".txt.gz"), mycat = "gunzip -c ",  
+                   NumFields = rep(3, 10),missingValue="NA",
+                   filterStr = " | cut -f1,2,3",
+                   suffix = "  > joined.txt", verbose=2)
+    
+    x = FullJoin(paste0("./fakeData/file",1:10,".txt.gz"), mycat = "gunzip -c ",  
                  NumFields = rep(3, 10),missingValue="NA",
                  filterStr = " | cut -f1,2,3",ReturnData=TRUE,
                  suffix = "", verbose=0)
-  
+  }
   #let us try a laarge example
   
   #uids = sort(paste0(sample(LETTERS,10^7,replace=TRUE), sample(10^8,10^7)))

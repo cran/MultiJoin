@@ -40,6 +40,8 @@ Note, comparisons honor the rules specified by LC_COLLATE.}
 
 
 \examples{
-ret = ArtificialData(fakeDataDir=tempdir(), numFiles=2,NCOL = rep(4,2))
-FullJoinPairs(ret$fnames[[1]][1], ret$fnames[[2]][1], o1=2:4, o2 = 2:4)
+if (0){
+  ret = ArtificialData(fakeDataDir=tempdir(), numFiles=2,NCOL = rep(4,2))
+  FullJoinPairs(ret$fnames[[1]][1], ret$fnames[[2]][1], o1=2:4, o2 = 2:4)
+}
 }

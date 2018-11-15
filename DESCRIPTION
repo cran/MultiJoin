@@ -2,9 +2,9 @@ Package: MultiJoin
 Type: Package
 Title: Enables Efficient Joining of Data File on Common Fields using
         the Unix Utility Join
-Version: 0.1
-Date: 2015-05-07
-Depends: R (>= 2.10), graphics, stats
+Version: 0.1.1
+Date: 2018-11-10
+Depends: R (>= 2.10), graphics, stats, utils
 Author: "Markus Loecher, Berlin School of Economics and Law (BSEL)" <markus.loecher@gmail.com>
 Maintainer: "Markus Loecher" <markus.loecher@gmail.com>
 Description: Wrapper around the Unix join facility which is more efficient than the built-in R routine merge().
@@ -13,7 +13,7 @@ Description: Wrapper around the Unix join facility which is more efficient than 
  Compiles only under Unix.
 License: GPL
 LazyLoad: yes
-Packaged: 2015-05-08 10:22:43 UTC; loecherm
 NeedsCompilation: no
+Packaged: 2018-11-15 14:10:12 UTC; loecherm
 Repository: CRAN
-Date/Publication: 2015-05-08 16:52:14
+Date/Publication: 2018-11-15 22:10:07 UTC

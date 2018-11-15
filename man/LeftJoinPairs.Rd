@@ -37,6 +37,7 @@ Note, comparisons honor the rules specified by LC_COLLATE.}
 
 
 \examples{
+if (0){
   LeftJoinPairs("f1.txt","f2.txt")
   
   #tab delimiter:
@@ -44,5 +45,5 @@ Note, comparisons honor the rules specified by LC_COLLATE.}
   cmd = LeftJoinPairs("/tmp/fakeData2/file1.txt","/tmp/fakeData2/file2.txt",sep = "\t")
  # cat(cmd, file = "/tmp/tmp.sh")
 #  system("bash /tmp/tmp.sh")
-  
+}
 }
